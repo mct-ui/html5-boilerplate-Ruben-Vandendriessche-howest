@@ -14,18 +14,17 @@
 
 @mixin mq($breakpoint, $query1: min, $query2: width) {
   $query: map-get($breakpoints, $breakpoint);
-  
-  @if $query != null {
-  @media (#{$query1}-#{$query2}: #{$query}) {
-  @content;
-  }
-  } @else {
-  @media (#{$query1}-#{$query2}: $breakpoint) {
-  @content;
-  }
-  }
-  }
 
+  @if $query != null {
+    @media (#{$query1}-#{$query2}: #{$query}) {
+      @content;
+    }
+  } @else {
+    @media (#{$query1}-#{$query2}: $breakpoint) {
+      @content;
+    }
+  }
+}
 
 /*---------------------------------------/*
  # SETTINGS
@@ -140,17 +139,17 @@ $space-xl: calc($space-m * 2); // 48px
 $space-xxl: calc($space-l * 2); // 64px
 $space-xxxl: calc($space-xl * 2); // 96px
 
-  // ---
-  // Settings: Breakpoints
-  // ---
-  
-  $breakpoints: (
+// ---
+// Settings: Breakpoints
+// ---
+
+$breakpoints: (
   bp1: calc(577 / 16 * 1em),
   bp2: calc(769 / 16 * 1em),
   bp3: calc(993 / 16 * 1em),
   bp4: calc(1201 / 16 * 1em),
   bp5: calc(1401 / 16 * 1em),
-  ) !default;
+) !default;
 
 /*---------------------------------------/*
  # GENERIC
@@ -321,6 +320,23 @@ a:active {
 */
 
 .o-row {
+  padding: $space-m $space-m 0;
+  display: flow-root;
+
+  &--primary {
+    background-color: $color-primary;
+  }
+
+  &--dark {
+    background-color: get-color(color-gray, 900);
+    color: white;
+  }
+
+  &--lg {
+    @include mq(bp4) {
+      padding: $space-xl $space-xl 0;
+    }
+  }
 }
 
 /*
@@ -330,6 +346,8 @@ a:active {
 */
 
 .o-container {
+  max-width: calc(800 / $root-font-size * 1rem);
+  margin: 0 auto;
 }
 
 /*
